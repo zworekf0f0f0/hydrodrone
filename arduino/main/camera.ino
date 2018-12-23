@@ -1,48 +1,48 @@
 
 
 // const int motorCamUDpwm = 3;
-const int motorCamUDforward = 12;
-const int motorCamUDreverse = 5;
+const int motorCamUDforward = 0;
+const int motorCamUDreverse = 1;
 
 // const int motorCamLRpwm = 5;
 const int motorCamLRforward = 7;
-const int motorCamLRreverse = 8;
+const int motorCamLRreverse = 6;
 
-void cameraInit() {
-  pinMode(motorCamUDforward, OUTPUT);
-  pinMode(motorCamUDreverse, OUTPUT);
+void cameraInit(PCF8574 pcfCamera) {
+  // pinMode(motorCamUDforward, OUTPUT);
+  // pinMode(motorCamUDreverse, OUTPUT);
 
-  // pinMode(motorCamLRpwm, OUTPUT);
-  pinMode(motorCamLRforward, OUTPUT);
-  pinMode(motorCamLRreverse, OUTPUT);
+  // // pinMode(motorCamLRpwm, OUTPUT);
+  // pinMode(motorCamLRforward, OUTPUT);
+  // pinMode(motorCamLRreverse, OUTPUT);
 
-  digitalWrite(motorCamUDforward, LOW);
-  digitalWrite(motorCamUDreverse, LOW);
-  digitalWrite(motorCamLRforward, LOW);
-  digitalWrite(motorCamLRreverse, LOW);
+  pcfCamera.write(motorCamUDforward, LOW);
+  pcfCamera.write(motorCamUDreverse, LOW);
+  pcfCamera.write(motorCamLRforward, LOW);
+  pcfCamera.write(motorCamLRreverse, LOW);
 }
 
-void cameraTest() {
+void cameraTest(PCF8574 pcfCamera) {
   // analogWrite(motorCamUDpwm, 255);
-  digitalWrite(motorCamUDforward, HIGH);
+  pcfCamera.write(motorCamUDforward, HIGH);
   delay(500);
-  digitalWrite(motorCamUDforward, LOW);
+  pcfCamera.write(motorCamUDforward, LOW);
   delay(100);
-  digitalWrite(motorCamUDreverse, HIGH);
+  pcfCamera.write(motorCamUDreverse, HIGH);
   delay(500);
-  digitalWrite(motorCamUDreverse, LOW);
+  pcfCamera.write(motorCamUDreverse, LOW);
 
   delay(100);
   Serial.println("camLR");
-  digitalWrite(motorCamLRforward, HIGH);
+  pcfCamera.write(motorCamLRforward, HIGH);
   delay(1000);
-  digitalWrite(motorCamLRforward, LOW);
+  pcfCamera.write(motorCamLRforward, LOW);
 
   delay(100);
 
-  digitalWrite(motorCamLRreverse, HIGH);
+  pcfCamera.write(motorCamLRreverse, HIGH);
   delay(2000);
-  digitalWrite(motorCamLRreverse, LOW);
+  pcfCamera.write(motorCamLRreverse, LOW);
 
   delay(100);
 

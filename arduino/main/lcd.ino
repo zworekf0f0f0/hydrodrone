@@ -4,6 +4,7 @@ LiquidCrystal_PCF8574 lcd(0x27);  // set the LCD address to 0x27 for a 16 chars 
 
 int show;
 String padder = "                ";
+boolean isHbEven = true; 
 
 void lcdInit() {
   int error;
@@ -63,4 +64,15 @@ void lcdPrintTitle(String msg) {
 void lcdPrintMessage(String msg) {
   lcd.setCursor(0, 1);
   lcd.print(msg + padder);
+}
+
+void lcdHb() {
+  lcd.setCursor(15, 0);
+  if (isHbEven) {
+    lcd.print("x");
+  } else {
+    lcd.print("o");
+  }
+
+  isHbEven = !isHbEven;
 }

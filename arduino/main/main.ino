@@ -15,6 +15,9 @@ void setup() {
   lcdInit();
   lcdTest();
 
+  PCF8574 pcf24(0x24);
+  pcf24.begin(LOW);
+
   lcdPrintTitle("initializing");
 
   pinMode(LED_BUILTIN, OUTPUT);
@@ -30,13 +33,16 @@ void setup() {
   Wire.begin();
   Serial.println("zrobione");
 
-  // i2cInit();
-  // i2cScan();
+  i2cInit();
+  i2cScan();
 
   lcdPrintMessage("... tower");
-  cameraInit();
-  cameraTest();
+  cameraInit(pcf24);
+  cameraTest(pcf24);
 
+  lcdPrintMessage("... steer");
+  steerInit(pcf24);
+  steerTest(pcf24);
 
   lcdPrintMessage("... engine");
   engineInit();
@@ -70,6 +76,7 @@ void loop() {
     Serial.print("hb+tps: ");
     Serial.println(ticksCounter);
     ticksCounter = 0;
+    lcdHb();
   }
 
   if (ticksCounter > 100) {
